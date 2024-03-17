@@ -13,7 +13,6 @@ import pandas as pd
 
 HERE = Path(__file__).parent
 DATA_FOLDER = HERE / "data"
-print("hamid")
 # ----------------------
 # 01 - LOADING THE DATA
 # ----------------------

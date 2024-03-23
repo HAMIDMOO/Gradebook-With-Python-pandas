@@ -10,6 +10,7 @@ to calculating final score for students.
 """
 
 import pandas as pd
+from functools import reduce
 
 roster = pd.read_csv("C:\\Users\\hamid\Desktop\\pandas first project\\data\\roster.csv")
 roster["NetID"]=roster["NetID"].str.lower()
@@ -30,10 +31,10 @@ hw_exam_grades_Excel= hw_exam_grades_Excel.drop(columns=["Homework 1 - Submissio
                                                  "Homework 10 - Submission Time"], axis=1)
 hw_exam_grades_Excel= hw_exam_grades_Excel.set_index("SID")
 hw_exam_grades_Excel= hw_exam_grades_Excel.sort_values("SID")
-#print(hw_exam_grades_Excel)
+print(hw_exam_grades_Excel)
 
 
-quiz_one_grade= pd.read_csv("C:\\Users\\hamid\Desktop\\pandas first project\data\\quiz_2_grades.csv")
+quiz_one_grade= pd.read_csv("C:\\Users\\hamid\Desktop\\pandas first project\data\\quiz_1_grades.csv")
 quiz_one_grade["First Name"]= quiz_one_grade["First Name"].str.lower()
 quiz_one_grade["Last Name"]= quiz_one_grade["Last Name"].str.lower()
 quiz_one_grade= quiz_one_grade.sort_values("First Name")
@@ -78,36 +79,10 @@ quiz_five_grade= quiz_five_grade.set_index("First Name")
 
 
 
-Section_1_Grades= pd.read_csv("C:\\Users\\hamid\\Desktop\\pandas first project\\data\\Section 1 Grades.csv")
-Section_1_Grades["First Name"]=Section_1_Grades["First Name"].str.lower()
-Section_1_Grades["Last Name"]= Section_1_Grades["Last Name"].str.lower()
-Section_1_Grades= Section_1_Grades.sort_values("SID")
-Section_1_Grades= Section_1_Grades.set_index("SID")
-#print(Section_1_Grades)
+merged_grades_datafram = pd.merge(quiz_one_grade,quiz_two_grade[['Grade']],on='First Name', how='left',suffixes=('_1','_2'))
+merged_grades_datafram = pd.merge(merged_grades_datafram,quiz_three_grade[['Grade']],on='First Name', how='left',suffixes=('_2','_3'))
+merged_grades_datafram = pd.merge(merged_grades_datafram,quiz_four_grade[['Grade']],on='First Name', how='left',suffixes=('_3','_4'))
+merged_grades_datafram = pd.merge(merged_grades_datafram,quiz_five_grade[['Grade']],on='First Name', how='left',suffixes=('_4','_5'))
+#print(merged_grades_datafram)
 
 
-
-Section_2_Grades= pd.read_csv("C:\\Users\\hamid\\Desktop\\pandas first project\\data\\Section 2 Grades.csv")
-Section_2_Grades["First Name"]=Section_2_Grades["First Name"].str.lower()
-Section_2_Grades["Last Name"]= Section_2_Grades["Last Name"].str.lower()
-Section_2_Grades= Section_2_Grades.sort_values("SID")
-Section_2_Grades= Section_2_Grades.set_index("SID")
-#print(Section_2_Grades)
-
-
-
-Section_3_Grades= pd.read_csv("C:\\Users\\hamid\\Desktop\\pandas first project\\data\\Section 3 Grades.csv")
-Section_3_Grades["First Name"]=Section_3_Grades["First Name"].str.lower()
-Section_3_Grades["Last Name"]= Section_3_Grades["Last Name"].str.lower()
-Section_3_Grades= Section_3_Grades.sort_values("SID")
-Section_3_Grades= Section_3_Grades.set_index("SID")
-print(Section_3_Grades)
-
-
-
-
-
-
-quiz_scores=pd.DataFrame(
-    
-)
